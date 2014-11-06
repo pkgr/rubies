@@ -24,5 +24,5 @@ mkdir -p "$BUILD_DIR/node/bin"
 tar xzf $output_dir/node-*.tgz -C "$BUILD_DIR/node/bin/"
 
 # clean up build dir
-rm -rf $BUILD_DIR/{.git,.gitignore,buildpack,patches,dependencies}
+rm -rf $BUILD_DIR/{.gitignore,buildpack,patches,dependencies}
 rm -rf $BUILD_DIR/ruby-*
