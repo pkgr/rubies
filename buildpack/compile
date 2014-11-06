@@ -5,14 +5,18 @@ set -ex
 BUILD_DIR="$1"
 CACHE_DIR="$2"
 ENV_DIR="$3"
-RUBIES="2.1.4"
+RUBIES="2.1.4 2.0.0-p594 1.9.3-p550"
 
 for ruby_version in $RUBIES ; do
 	output_dir=$(mktemp -d)
 	VERSION="$ruby_version" $BUILD_DIR/buildpack/build.rb "$BUILD_DIR" "$output_dir" "$CACHE_DIR"
-	mkdir -p $BUILD_DIR/$ruby_version
 
+	install_dir="$BUILD_DIR/${ruby_version/-*/}"
+	mkdir -p "$install_dir"
 	for file in $output_dir/*.tgz ; do
-		tar xzf $file -C $BUILD_DIR/$ruby_version
+		tar xzf $file -C $install_dir
 	done
 done
+
+# clean up build dir
+rm -rf $BUILD_DIR/{.git,.gitignore,buildpack,patches,dependencies}

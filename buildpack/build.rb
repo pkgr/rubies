@@ -227,6 +227,7 @@ Dir.mktmpdir("ruby-vendor-") do |vendor_dir|
     pipe "tar zxf #{cache_dir}/rubygems-#{rubygems}.tgz" if rubygems
   end
 
+  # prefix is not important, since we're using --enable-load-relative
   prefix = "/tmp/#{name}"
 
   Dir.chdir(full_name) do
@@ -269,10 +270,7 @@ Dir.mktmpdir("ruby-vendor-") do |vendor_dir|
     end
   end
   Dir.chdir(prefix) do
-
-    pipe "ls"
     puts "Writing #{filename}"
     pipe("tar czf #{output_dir}/#{filename} *")
   end
 end
-
