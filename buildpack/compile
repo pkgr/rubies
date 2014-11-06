@@ -26,6 +26,7 @@ for ruby_version in $RUBIES ; do
 		chmod 0755 "$dir"
 
 		cat $BUILD_DIR/buildpack/gem_header.sh $dir/bin/bundle > $install_dir/bin/bundle
+		chmod 0755 $install_dir/bin/bundle
 	done
 
 	chmod 0755 "$install_dir"
