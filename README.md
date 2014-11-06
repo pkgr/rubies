@@ -14,7 +14,6 @@ Note: MRI rubies include statically compiled versions of libffi (3.0.10), libyam
 
 ## Supported distributions
 
-* Fedora 20 x86_64
 * Ubuntu 14.04 LTS x86_64
 * Ubuntu 12.04 LTS x86_64
 * Debian 7 x86_64
