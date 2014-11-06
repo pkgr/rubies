@@ -24,6 +24,13 @@ Note: MRI rubies include statically compiled versions of libffi (3.0.10), libyam
 
 Head over to <https://packager.io/gh/pkgr/rubies>, and select the instructions for your distribution.
 
+For instance, on Ubuntu 14.04:
+
+    wget -qO - https://deb.packager.io/key | sudo apt-key add -
+    echo "deb https://deb.packager.io/gh/pkgr/rubies trusty master" | sudo tee /etc/apt/sources.list.d/rubies.list
+    sudo apt-get update
+    sudo apt-get install rubies
+
 ## Usage
 
 The package installs files in `/opt/rubies`. Here is the content of that directory:
