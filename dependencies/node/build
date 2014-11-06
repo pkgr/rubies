@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+workspace_dir=$1
+output_dir=$2
+
+curl http://nodejs.org/dist/node-v$VERSION.tar.gz -s -o - | tar zxf -
+
+cd node-v$VERSION
+env CFLAGS=-fPIC CPPFLAGS=-DOPENSSL_NO_SSL2=1 ./configure --prefix=$output_dir
+make install
+
+mv ${output_dir}/bin/node ${output_dir}/.
+rm -rf ${output_dir}/include
+rm -rf ${output_dir}/lib
+rm -rf ${output_dir}/share
+rm -rf ${output_dir}/bin

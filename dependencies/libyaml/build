@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+workspace_dir=$1
+output_dir=$2
+
+curl -s "http://pyyaml.org/download/libyaml/yaml-${VERSION}.tar.gz" -o - | tar xzf - --strip-components=1
+env CFLAGS=-fPIC ./configure --enable-static --disable-shared --prefix=${output_dir}
+make
+make install

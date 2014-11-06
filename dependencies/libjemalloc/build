@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+workspace_dir=$1
+output_dir=$2
+
+curl -s "http://www.canonware.com/download/jemalloc/jemalloc-$VERSION.tar.bz2" -o - | tar xjf - --strip-components=1
+env CFLAGS=-fPIC ./configure --enable-static --disable-shared --prefix=${output_dir}
+make
+make install
+
+# remove shared libraries
+rm ${output_dir}/lib/libjemalloc.so*

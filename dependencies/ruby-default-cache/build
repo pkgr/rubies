@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'tmpdir'
+
+def pipe(command)
+  puts command
+  output = ""
+  IO.popen(command) do |io|
+    until io.eof?
+      buffer = io.gets
+      output << buffer
+      puts buffer
+    end
+  end
+
+  raise "failed while running command: #{command}" unless $?.success?
+  output
+end
+
+workspace_dir, output_dir = ARGV
+gemfile_dirs = Dir.glob("/tmp/buildpack_*/gemfiles/*").reject {|s| s.include?("manifest") }.map {|dir| File.expand_path(dir) }
+bundler      = "bundler-1.5.0.rc.1"
+ruby         = "ruby-#{ENV["RUBY_VERSION"]}"
+vendor_url   =  "https://s3-external-1.amazonaws.com/#{ENV.fetch("S3_BUCKET_NAME") { "heroku-buildpack-ruby" }}"
+libyaml      = ENV.fetch('LIBYAML_VERSION')
+
+FileUtils.mkdir_p(ruby)
+Dir.chdir(ruby) do
+  pipe "curl #{vendor_url}/#{ruby}.tgz -s -o - | tar xzf -"
+end
+FileUtils.mkdir_p(bundler)
+Dir.chdir(bundler) do
+  pipe "curl #{vendor_url}/#{bundler}.tgz -s -o - | tar xzf -"
+end
+
+ext = "ext"
+
+FileUtils.mkdir_p(ext)
+Dir.chdir(ext) do
+  pipe "curl #{vendor_url}/libyaml-#{libyaml}.tgz -s -o - | tar xzf -"
+end
+
+gem_home     = "#{output_dir}/vendor/bundle/ruby/2.0.0"
+gem_path     = "#{gem_home}:#{workspace_dir}/#{bundler}"
+path         = "#{workspace_dir}/#{ruby}/bin:#{workspace_dir}/#{bundler}/bin:$PATH"
+yaml_include = "#{workspace_dir}/#{ext}/include"
+yaml_lib     = "#{workspace_dir}/#{ext}/lib"
+cmd          = "bundle install"
+opts         = "--path #{output_dir}/vendor/bundle --deployment -j4"
+env_hash     = {
+  "PATH"                          => path,
+  "GEM_HOME"                      => gem_home,
+  "GEM_PATH"                      => gem_path,
+  "CPATH"                         => "#{yaml_include}:$CPATH",
+  "CPPATH"                        => "#{yaml_include}:$CPPATH",
+  "LIBRARY_PATH"                  => "#{yaml_lib}:$LIBRARY_PATH",
+  "NOKOGIRI_USE_SYSTEM_LIBRARIES" => "true"
+}
+
+gemfile_dirs.each do |gemfile_dir|
+  env = env_hash.merge({
+    "BUNDLE_GEMFILE"                => "#{workspace_dir}/Gemfile",
+    "BUNDLE_CONFIG"                 => "#{`pwd`.chomp}/.bundle/config",
+  }).to_a.map {|k,v| "#{k}=#{v}" }.join(" ")
+
+  FileUtils.cp("#{gemfile_dir}/Gemfile", ".")
+  FileUtils.cp("#{gemfile_dir}/Gemfile.lock", ".")
+  pipe("env #{env} #{cmd} #{opts}")
+end

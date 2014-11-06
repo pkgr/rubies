@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+workspace_dir=$1
+output_dir=$2
+
+export LANG="en_US.UTF-8"
+export GEM_HOME=$output_dir
+
+gem install $GEM --version $VERSION --no-ri --no-rdoc --env-shebang
+
+rm -rf $output_dir/cache/$GEM-$VERSION.gem

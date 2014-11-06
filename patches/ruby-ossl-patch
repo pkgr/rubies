@@ -1,0 +1,25 @@
+--- ext/openssl/ossl_pkey_ec.c 2012-02-19 06:09:11.000000000 -0800
++++ ext/openssl/ossl_pkey_ec.c 2014-01-03 16:37:11.077561351 -0800
+@@ -757,8 +757,10 @@
+                 method = EC_GFp_mont_method();
+             } else if (id == s_GFp_nist) {
+                 method = EC_GFp_nist_method();
++#if !defined(OPENSSL_NO_EC2M)
+             } else if (id == s_GF2m_simple) {
+                 method = EC_GF2m_simple_method();
++#endif
+             }
+
+             if (method) {
+@@ -811,8 +813,10 @@
+
+             if (id == s_GFp) {
+                 new_curve = EC_GROUP_new_curve_GFp;
++#if !defined(OPENSSL_NO_EC2M)
+             } else if (id == s_GF2m) {
+                 new_curve = EC_GROUP_new_curve_GF2m;
++#endif
+             } else {
+                 rb_raise(rb_eArgError, "unknown symbol, must be :GFp or :GF2m");
+             }
+
