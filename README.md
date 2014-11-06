@@ -46,6 +46,9 @@ Using one of those rubies (for instance 2.1.4) is as simple as:
     $ /opt/rubies/2.1.4/bin/gem -v
     2.2.2
 
+    $ /opt/rubies/2.1.4/bin/bundle -v
+    Bundler version 1.6.3
+
 Note: You probably want to add `/opt/rubies/2.1.4/bin` to your `$PATH` environment variable for convenience.
 
 ## Extras
