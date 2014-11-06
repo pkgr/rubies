@@ -240,7 +240,7 @@ Dir.mktmpdir("ruby-vendor-") do |vendor_dir|
     else
       configure_env = "debugflags=\"-g\""
     end
-    configure_env += " LDFLAGS=\"-L/#{vendor_dir}/lib\" LIBRARY_PATH=#{vendor_dir}/lib:\\$LIBRARY_PATH"
+    configure_env += " LDFLAGS=\"-L#{vendor_dir}/lib\" LIBRARY_PATH=#{vendor_dir}/lib:\\$LIBRARY_PATH"
 
     configure_opts = "--disable-install-doc --prefix #{prefix}"
     configure_opts += " --enable-load-relative" if major_ruby != "1.8" && version != "1.9.2"
