@@ -227,10 +227,7 @@ Dir.mktmpdir("ruby-vendor-") do |vendor_dir|
     pipe "tar zxf #{cache_dir}/rubygems-#{rubygems}.tgz" if rubygems
   end
 
-  prefix = "/app/vendor/#{name}"
-  prefix = "/tmp/#{name}" if build
-
-  puts "prefix: #{prefix}"
+  prefix = "/tmp/#{name}"
 
   Dir.chdir(full_name) do
     pipe "git checkout #{treeish}" if treeish
