@@ -16,7 +16,13 @@ for ruby_version in $RUBIES ; do
 	for file in $output_dir/*.tgz ; do
 		tar xzf $file -C $install_dir
 	done
+	rm -f $install_dir/node
 done
+
+# install node in separate bin directory
+mkdir -p "$BUILD_DIR/node/bin"
+tar xzf $output_dir/node-*.tgz -C "$BUILD_DIR/node/bin/"
 
 # clean up build dir
 rm -rf $BUILD_DIR/{.git,.gitignore,buildpack,patches,dependencies}
+rm -rf $BUILD_DIR/ruby-*
