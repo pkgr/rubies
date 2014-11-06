@@ -17,11 +17,14 @@ for ruby_version in $RUBIES ; do
 		tar xzf $file -C $install_dir
 	done
 	rm -f $install_dir/node
+
+	chmod 0755 "$install_dir"
 done
 
 # install node in separate bin directory
 mkdir -p "$BUILD_DIR/node/bin"
 tar xzf $output_dir/node-*.tgz -C "$BUILD_DIR/node/bin/"
+chmod 0755 "$BUILD_DIR/node/bin"
 
 # clean up build dir
 rm -rf $BUILD_DIR/{.gitignore,buildpack,patches,dependencies}
