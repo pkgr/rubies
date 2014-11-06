@@ -91,8 +91,8 @@ class Compiler
     "#{name}-#{version}.tgz"
   end
 
-  def compile!
-    unless File.exists?(File.join(self.class.cache_dir, tgz_name))  
+  def compile!(force = false)
+    if force || !File.exists?(File.join(self.class.cache_dir, tgz_name))
       puts "Compiling #{tgz_name}..."
       input, output = Dir.mktmpdir, Dir.mktmpdir  
       env_string = env.map{|k,v| [k,v].join("=")}.join(" ")
@@ -159,9 +159,9 @@ Compiler.compile!("libjemalloc", "libjemalloc", LIBJEMALLOC_VERSION).copy_to(out
 Compiler.compile!("libffi", "libffi", LIBFFI_VERSION).copy_to(output_dir)
 Compiler.compile!("libyaml", "libyaml", LIBYAML_VERSION).copy_to(output_dir)
 Compiler.compile!("node", "node", "0.6.8").copy_to(output_dir)
-Compiler.compile!("gem", "bundler", "1.6.3", {"GEM" => "bundler"}).copy_to(output_dir)
-Compiler.compile!("gem", "bundler", "1.5.2", {"GEM" => "bundler"}).copy_to(output_dir)
-Compiler.compile!("gem", "bundler", "1.5.0.rc.1", {"GEM" => "bundler"}).copy_to(output_dir)
+Compiler.new("gem", "bundler", "1.6.3", {"GEM" => "bundler"}).compile!(true).copy_to(output_dir)
+# Compiler.new("gem", "bundler", "1.5.2", {"GEM" => "bundler"}).copy_to(output_dir)
+# Compiler.new("gem", "bundler", "1.5.0.rc.1", {"GEM" => "bundler"}).copy_to(output_dir)
 
 if File.exists?(File.join(output_dir, filename))
   puts "#{filename} already exists. not rebuilding."
