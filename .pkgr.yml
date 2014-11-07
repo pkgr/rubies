@@ -1,11 +1,12 @@
 user: rubies
 group: rubies
+cli: false
 buildpack: https://github.com/pkgr/pkgr-source-buildpack
 targets:
   debian-7:
-  # ubuntu-12.04:
-  # ubuntu-14.04:
-  # centos-6:
+  ubuntu-12.04:
+  ubuntu-14.04:
+  centos-6:
 variants:
   "ruby-2.1":
     RUBIES: "2.1.4"
