@@ -1,3 +1,5 @@
+user: rubies
+group: rubies
 buildpack: https://github.com/pkgr/pkgr-source-buildpack
 targets:
   debian-7:
