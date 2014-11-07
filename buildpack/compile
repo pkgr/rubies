@@ -5,7 +5,7 @@ set -ex
 BUILD_DIR="$1"
 CACHE_DIR="$2"
 ENV_DIR="$3"
-RUBIES="2.1.4 2.0.0-p594 1.9.3-p550"
+: ${RUBIES:?"Needs to set RUBIES"}
 
 for ruby_version in $RUBIES ; do
 	output_dir=$(mktemp -d)

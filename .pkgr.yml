@@ -4,3 +4,10 @@ targets:
   ubuntu-12.04:
   ubuntu-14.04:
   centos-6:
+variants:
+  "ruby-2.1":
+    RUBIES: "2.1.4"
+  "ruby-2.0":
+    RUBIES: "2.0.0-p594"
+  "ruby-1.9":
+    RUBIES: "1.9.3-p550"
