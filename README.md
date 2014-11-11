@@ -4,7 +4,7 @@ This repository hosts the source code that compiles up to date MRI Ruby versions
 
 This work is supported by [Packager.io](https://packager.io).
 
-## Included Ruby versions
+## Supported Ruby versions
 
 * MRI 2.1.4 (patchlevel 265, rubygems 2.2.2)
 * MRI 2.0.0 (patchlevel 594, rubygems 2.0.14)
@@ -20,40 +20,39 @@ Note: MRI rubies include statically compiled versions of libffi (3.0.10), libyam
 * CentOS 6 x86_64
 * RedHat 6 x86_64
 
-## How to install
+## Installation & Usage
 
 Head over to <https://packager.io/gh/pkgr/rubies>, and select the instructions for your distribution.
 
-For instance, on Ubuntu 14.04:
+For instance, on Ubuntu 14.04, to install the latest ruby-2.1:
 
     wget -qO - https://deb.packager.io/key | sudo apt-key add -
-    echo "deb https://deb.packager.io/gh/pkgr/rubies trusty master" | sudo tee /etc/apt/sources.list.d/rubies.list
+    echo "deb https://deb.packager.io/gh/pkgr/rubies trusty stable" | sudo tee /etc/apt/sources.list.d/rubies.list
     sudo apt-get update
-    sudo apt-get install rubies
+    sudo apt-get install ruby-2.1
 
-## Usage
+The package will install files in `/opt/ruby-2.1`, and executables in `/opt/ruby-2.1/bin`.
 
-The package installs files in `/opt/rubies`. Here is the content of that directory:
+Using the installed ruby is then simple:
 
-    $  ls /opt/rubies/
-    1.9.3  2.0.0  2.1.4  log  node  vendor
-
-Using one of those rubies (for instance 2.1.4) is as simple as:
-
-    $ /opt/rubies/2.1.4/bin/ruby -v
+    $ /opt/ruby-2.1/bin/ruby -v
     ruby 2.1.4p265 (2014-10-27 revision 48166) [x86_64-linux]
 
-    $ /opt/rubies/2.1.4/bin/gem -v
+    $ /opt/ruby-2.1/bin/gem -v
     2.2.2
 
-    $ /opt/rubies/2.1.4/bin/bundle -v
+    $ /opt/ruby-2.1/bin/bundle -v
     Bundler version 1.6.3
 
-Note: You probably want to add `/opt/rubies/2.1.4/bin` to your `$PATH` environment variable for convenience.
+Note: You probably want to add `/opt/ruby-2.1/bin` to your `$PATH` environment variable for convenience.
 
 ## Extras
 
-A version of `node` is also shipped with the package, in `/opt/rubies/node/bin`. This is an old version (0.6.8), but could be useful if you just want to precompile assets and don't need a more recent version.
+A version of `node` is also shipped with the package, in `/opt/ruby-{2.1,2.0,1.9}/node/bin`. This is an old version (0.6.8), but could be useful if you just want to precompile assets and don't need a more recent version.
+
+## Maintenance
+
+Packages will be updated whenever a patch-level release is released, i.e. ruby-2.1 will include the latest stable release of ruby `2.1.*`, ruby-2.0 will include the latest stable release of ruby `2.0.0-p*`, and ruby-1.9 will include the latest stable release of ruby `1.9.3-p*`.
 
 ## Maintainers
 
