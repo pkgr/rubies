@@ -11,6 +11,6 @@ variants:
   "ruby-2.1":
     RUBIES: "2.1.5"
   "ruby-2.0":
-    RUBIES: "2.0.0-p594"
+    RUBIES: "2.0.0-p598"
   "ruby-1.9":
-    RUBIES: "1.9.3-p550"
+    RUBIES: "1.9.3-p551"
