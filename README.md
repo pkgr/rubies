@@ -6,7 +6,7 @@ This work is supported by [Packager.io](https://packager.io).
 
 ## Supported Ruby versions
 
-* MRI 2.1.4 (patchlevel 265, rubygems 2.2.2)
+* MRI 2.1.5 (patchlevel 273, rubygems 2.2.2)
 * MRI 2.0.0 (patchlevel 594, rubygems 2.0.14)
 * MRI 1.9.3 (patchlevel 550, rubygems 1.8.23.2)
 
@@ -36,7 +36,7 @@ The package will install files in `/opt/ruby-2.1`, and executables in `/opt/ruby
 Using the installed ruby is then simple:
 
     $ /opt/ruby-2.1/bin/ruby -v
-    ruby 2.1.4p265 (2014-10-27 revision 48166) [x86_64-linux]
+    ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-linux]
 
     $ /opt/ruby-2.1/bin/gem -v
     2.2.2
