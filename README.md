@@ -7,8 +7,8 @@ This work is supported by [Packager.io](https://packager.io).
 ## Supported Ruby versions
 
 * MRI 2.1.5 (patchlevel 273, rubygems 2.2.2)
-* MRI 2.0.0 (patchlevel 594, rubygems 2.0.14)
-* MRI 1.9.3 (patchlevel 550, rubygems 1.8.23.2)
+* MRI 2.0.0 (patchlevel 598, rubygems 2.0.14)
+* MRI 1.9.3 (patchlevel 551, rubygems 1.8.23.2)
 
 Note: MRI rubies include statically compiled versions of libffi (3.0.10), libyaml (0.1.6), and libjemalloc (3.6.0).
 
