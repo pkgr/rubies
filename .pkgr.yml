@@ -9,7 +9,7 @@ targets:
   centos-6:
 variants:
   "ruby-2.1":
-    RUBIES: "2.1.4"
+    RUBIES: "2.1.5"
   "ruby-2.0":
     RUBIES: "2.0.0-p594"
   "ruby-1.9":
