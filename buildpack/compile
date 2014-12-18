@@ -25,8 +25,9 @@ for ruby_version in $RUBIES ; do
 		tar xzf $output_dir/bundler-1.6.3.tgz -C $dir
 		chmod 0755 "$dir"
 
-		cat $BUILD_DIR/buildpack/gem_header.sh $dir/bin/bundle > $install_dir/bin/bundle
-		chmod 0755 $install_dir/bin/bundle
+		cat $BUILD_DIR/buildpack/gem_header.sh $dir/bin/bundle | tee $dir/bin/bundle &>/dev/null
+		chmod 0755 $dir/bin/bundle
+		ln -s "../lib/ruby/gems/$(basename $dir)/bin/bundle" $install_dir/bin/bundle
 	done
 
 	chmod 0755 "$install_dir"
