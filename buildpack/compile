@@ -15,9 +15,9 @@ for ruby_version in $RUBIES ; do
 	install_dir="$BUILD_DIR"
 	mkdir -p "$install_dir"
 
-	# for file in $output_dir/lib*.tgz ; do
-	# 	tar xzf $file -C $install_dir
-	# done
+	for file in $output_dir/lib*.tgz ; do
+		tar xzf $file -C $install_dir
+	done
 
 	tar xzf $output_dir/ruby-$short_version.tgz -C $install_dir
 
