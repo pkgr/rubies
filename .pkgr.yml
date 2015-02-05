@@ -8,6 +8,8 @@ targets:
   ubuntu-14.04:
   centos-6:
 variants:
+  "ruby-2.2":
+    RUBIES: "2.2.0"
   "ruby-2.1":
     RUBIES: "2.1.5"
   "ruby-2.0":

@@ -124,7 +124,7 @@ output_dir    = ARGV[1]
 cache_dir     = ARGV[2]
 
 LIBYAML_VERSION = "0.1.6"
-LIBFFI_VERSION  = "3.0.10"
+LIBFFI_VERSION  = "3.2.1"
 LIBJEMALLOC_VERSION = "3.6.0"
 
 vendor_url   = "https://s3.amazonaws.com/#{ENV['S3_BUCKET_NAME'] ? ENV['S3_BUCKET_NAME'] : 'heroku-buildpack-ruby'}"
@@ -159,7 +159,7 @@ Compiler.compile!("libjemalloc", "libjemalloc", LIBJEMALLOC_VERSION).copy_to(out
 Compiler.compile!("libffi", "libffi", LIBFFI_VERSION).copy_to(output_dir)
 Compiler.compile!("libyaml", "libyaml", LIBYAML_VERSION).copy_to(output_dir)
 Compiler.compile!("node", "node", "0.6.8").copy_to(output_dir)
-Compiler.new("gem", "bundler", "1.6.3", {"GEM" => "bundler"}).compile!(true).copy_to(output_dir)
+Compiler.new("gem", "bundler", "1.7.12", {"GEM" => "bundler"}).compile!(true).copy_to(output_dir)
 # Compiler.new("gem", "bundler", "1.5.2", {"GEM" => "bundler"}).copy_to(output_dir)
 # Compiler.new("gem", "bundler", "1.5.0.rc.1", {"GEM" => "bundler"}).copy_to(output_dir)
 
