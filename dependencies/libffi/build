@@ -7,3 +7,5 @@ curl -s "ftp://sourceware.org/pub/libffi/libffi-${VERSION}.tar.gz" -o - | tar xz
 env CFLAGS=-fPIC ./configure --enable-static --disable-shared --prefix=${output_dir}
 make
 make install
+# copy ffi headers in a place where ruby can find them
+cp -r ${output_dir}/lib/libffi-${VERSION}/include ${output_dir}/
